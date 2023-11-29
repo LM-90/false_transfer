@@ -1,0 +1,50 @@
+<!-- Speichere dies als index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation Example</title>
+</head>
+<body>
+
+    <h1>Geolocation Example</h1>
+
+    <p>Klicken Sie auf den unten stehenden Link, um Ihren Standort abzurufen:</p>
+
+    <a href="#" id="getLocation">Meinen Standort abrufen</a>
+
+    <script>
+        document.getElementById('getLocation').addEventListener('click', function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert('Ihr Browser unterstützt die Geolocation-API nicht.');
+            }
+        });
+
+        function showPosition(position) {
+            alert('Ihr Standort: ' + position.coords.latitude + ', ' + position.coords.longitude);
+            // Hier könntest du die Koordinaten weiterverarbeiten oder an deinen Server senden.
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert('Standortfreigabe abgelehnt.');
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert('Standortinformation nicht verfügbar.');
+                    break;
+                case error.TIMEOUT:
+                    alert('Zeitüberschreitung bei der Standortabfrage.');
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert('Unbekannter Fehler bei der Standortabfrage.');
+                    break;
+            }
+        }
+    </script>
+
+</body>
+</html>
